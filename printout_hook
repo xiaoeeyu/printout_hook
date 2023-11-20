@@ -1,0 +1,101 @@
+function main(){
+    Java.perform(function(){
+        // Java.use("java.lang.Character").toString.overload('char').implementation = function(x){
+        //     var result = this.toString(x);
+        //     console.log("x, result", x, result);
+        //     return "小明";  // retutn result can be changed
+        // }
+        
+        // Java.use("java.util.Arrays").toString.overload('[C').implementation = function(x){
+        //     var charArray = Java.array('char',['东','风','夜','放','花','千','树']);
+        //     var result = this.toString(charArray);
+        //     console.log("x, result", JSON.stringify(charArray), result);
+        //     return Java.use('java.lang.String').$new(Java.array('char',['谁','念','西','风','独','自','凉']));  // retutn result can be changed
+        // }
+
+        // Java.use("java.util.Arrays").toString.overload('[B').implementation = function(x){
+ 
+        //     var result = this.toString(x);
+        //     console.log("x, result", JSON.stringify(x), result);
+        //     return result;  // retutn result can be changed
+        // }
+
+        // var Waterhandle = null;
+        // Java.choose("com.xiaoeryu.printout.Water", {
+        //     onMatch: function (instance) {
+        //         console.log("found instance:", instance);
+        //         console.log("water instance call flow:", instance.still(instance));
+        //         Waterhandle = instance;
+        //     },
+        //     onComplete: function () {
+        //         console.log("search completed! Waterhandle:", Waterhandle);
+        //     }
+        // });
+        // // 这是错误的父类不能强转为子类的对象
+        // var JuiceHandle = Java.cast(Waterhandle,Java.use("com.xiaoeryu.printout.Juice"));
+        // console.log("Juice fillEnergy method :",JuiceHandle.fillEnergy());
+
+        // var JuiceHandle = null ;
+        // Java.choose("com.xiaoeryu.printout.Juice",{
+        //     onMatch:function(instance){
+        //         console.log("found instance :",instance);
+        //         console.log("filling energy,",instance.fillEnergy());
+        //         JuiceHandle= instance;
+        //     },onComplete:function(){"Search Completed juice!"}
+        // })
+
+        // var WaterHandle = Java.cast(JuiceHandle, Java.use("com.xiaoeryu.printout.Water"));
+        // console.log("Water invoke still ", WaterHandle.still(WaterHandle));
+
+        // const beer = Java.registerClass({
+        //     name: 'com.xiaoeryu.printout.beer',
+        //     implements: [Java.use("com.xiaoeryu.printout.liquid")],
+        //     methods: {
+        //         flow:function(){
+        //             console.log("look I'm beer! ");
+        //             return "taste good";
+        //         }
+        //     }
+        //   });
+        //   console.log("beer.flow: ", beer.$new().flow());
+
+        // Java.choose("com.xiaoeryu.printout.Signal", {
+        //     onMatch:function(instance){
+        //         console.log("found instance: ", instance);
+        //         console.log("invoke getDeclaringClass", instance.getDeclaringClass());
+        //     }, onComplete:function(){console.log("search completed!")}
+        // })
+
+
+
+    })
+}
+
+function HashMap888(){
+    Java.perform(function(){
+
+        Java.choose("java.util.HashMap",{
+            onMatch:function(instance){
+                if(instance.toString().indexOf("xiaoeryu") != -1){
+                    console.log("found HashMap",instance);
+                    console.log("HashMap toString:",instance.toString());
+                }               
+            },onComplete:function(){console.log("Search Completed Map!")}
+        })
+
+        Java.use("java.util.HashMap").put.implementation = function(x, y){
+            var result = this.put(x, y);
+            console.log("x, y, result", x, y, result);
+            return result;
+        }
+
+    })
+}
+
+
+setImmediate(HashMap888);
+// setTimeout(HashMap888,3000);
+
+// setInterval(function() {
+//     HashMap888();
+// }, 3000);
